@@ -1,7 +1,7 @@
 # Problem Set 2, hangman.py
-# Name: 
-# Collaborators:
-# Time spent:
+# Name: akash
+# Collaborators: ~
+# Time spent: 4
 
 # Hangman Game
 # -----------------------------------
@@ -60,9 +60,15 @@ def is_word_guessed(secret_word, letters_guessed):
     returns: boolean, True if all the letters of secret_word are in letters_guessed;
       False otherwise
     '''
-    # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
-
+    count = len(secret_word)
+    for i in secret_word:
+        for j in letters_guessed:
+            if i == j:
+                count-=1
+    if count == 0:
+      return True
+    else:
+      return False
 
 
 def get_guessed_word(secret_word, letters_guessed):
