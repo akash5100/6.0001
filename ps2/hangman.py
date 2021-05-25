@@ -1,7 +1,7 @@
 # Problem Set 2, hangman.py
 # Name: akash
 # Collaborators: ~
-# Time spent: 4
+# Time spent: 5
 
 # Hangman Game
 # -----------------------------------
@@ -78,9 +78,15 @@ def get_guessed_word(secret_word, letters_guessed):
     returns: string, comprised of letters, underscores (_), and spaces that represents
       which letters in secret_word have been guessed so far.
     '''
-    # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
-
+    letters_of_secret_word = list(secret_word)
+    guessed_word = ''
+    for i in letters_of_secret_word:
+        if i in letters_guessed:
+            guessed_word += i 
+        else:
+            guessed_word += '_ '
+    return guessed_word
+    
 
 
 def get_available_letters(letters_guessed):
@@ -89,9 +95,11 @@ def get_available_letters(letters_guessed):
     returns: string (of letters), comprised of letters that represents which letters have not
       yet been guessed.
     '''
-    # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
-    
+    string = 'abcdefghijklmnopqrstuvwxyz'
+    for word in letters_guessed:
+        if word in string:
+            string = string.replace(word,'')
+    return string
     
 
 def hangman(secret_word):
