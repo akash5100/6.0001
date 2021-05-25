@@ -1,7 +1,7 @@
 # Problem Set 2, hangman.py
 # Name: akash
 # Collaborators: ~
-# Time spent: 5
+# Time spent: 7
 
 # Hangman Game
 # -----------------------------------
@@ -86,7 +86,6 @@ def get_guessed_word(secret_word, letters_guessed):
         else:
             guessed_word += '_ '
     return guessed_word
-    
 
 
 def get_available_letters(letters_guessed):
@@ -127,10 +126,27 @@ def hangman(secret_word):
     
     Follows the other limitations detailed in the problem write-up.
     '''
-    # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
+    i = len(secret_word)
+    print(f'\nWelcome to the game Hangman!\nI am thinking of a word that is {i} letters long.\n-------------\n') 
 
+    num_of_guess = 6
+    letters_guessed = []
 
+    while num_of_guess != 0:
+      available_letters = get_available_letters(letters_guessed)
+      print(f'You have {num_of_guess} guesses left.')
+      print(available_letters)
+      letter = input('Please guess a letter: ')
+      letters_guessed.append(letter)
+      if letter in secret_word:
+        guessed_word = get_guessed_word(secret_word,letters_guessed)
+        
+        print('Good guess:' + guessed_word + "\n\n-------------\n") 
+      else:
+        guessed_word = get_guessed_word(secret_word,letters_guessed)
+
+        print('Oops! That letter is not in my word: ' + guessed_word + "\n\n-------------\n")
+        num_of_guess -= 1
 
 # When you've completed your hangman function, scroll down to the bottom
 # of the file and uncomment the first two lines to test
@@ -215,7 +231,8 @@ if __name__ == "__main__":
     # To test part 2, comment out the pass line above and
     # uncomment the following two lines.
     
-    secret_word = choose_word(wordlist)
+    ######secret_word = choose_word(wordlist)
+    secret_word = 'akash'
     hangman(secret_word)
 
 ###############
