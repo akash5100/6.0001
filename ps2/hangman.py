@@ -11,6 +11,7 @@
 # (so be sure to read the docstrings!)
 import random
 import string
+from typing import Set
 
 WORDLIST_FILENAME = "words.txt"
 
@@ -100,6 +101,24 @@ def get_available_letters(letters_guessed):
             string = string.replace(word,'')
     return string
     
+def unique_letters(secret_word):
+  '''
+  returns the number of unique letter in secret word
+  '''
+  letter = set(secret_word)
+  i = len(letter)
+  return i
+
+def is_vowel(letter):
+  '''
+  return: 2 if letter guessed is vowel 
+  return: 1 if letter guessed is Consonant
+  '''
+  vowel = ['a','e','i','o','u']
+  if letter in vowel:
+    return 2
+  else:
+    return 1
 
 def hangman(secret_word):
     '''
@@ -127,26 +146,66 @@ def hangman(secret_word):
     Follows the other limitations detailed in the problem write-up.
     '''
     i = len(secret_word)
-    print(f'\nWelcome to the game Hangman!\nI am thinking of a word that is {i} letters long.\n-------------\n') 
-
     num_of_guess = 6
+    warning = 3
     letters_guessed = []
 
-    while num_of_guess != 0:
-      available_letters = get_available_letters(letters_guessed)
-      print(f'You have {num_of_guess} guesses left.')
-      print(available_letters)
-      letter = input('Please guess a letter: ')
-      letters_guessed.append(letter)
-      if letter in secret_word:
-        guessed_word = get_guessed_word(secret_word,letters_guessed)
-        
-        print('Good guess:' + guessed_word + "\n\n-------------\n") 
-      else:
-        guessed_word = get_guessed_word(secret_word,letters_guessed)
+    #start up 
+    print(f'\nWelcome to the game Hangman!\nI am thinking of a word that is {i} letters long.\n') 
+    print(f'You have {warning} warnings left.\n-------------')
 
-        print('Oops! That letter is not in my word: ' + guessed_word + "\n\n-------------\n")
-        num_of_guess -= 1
+
+    #promt user
+    while num_of_guess != 0 and warning != 0:
+      available_letters = get_available_letters(letters_guessed)
+      
+      print(f'You have {num_of_guess} guesses left.')
+      print('available letters: ' + available_letters)
+
+      #checking for lower case
+      temp = input('Please guess a letter: ')
+      letter = temp.lower()
+      
+      #checking for alphabet and single character
+      if letter.isalpha() and len(letter) == 1:
+        #checking if letter already in list
+        if letter in letters_guessed:
+          warning-=1
+          print("\nOops! You've already guessed that letter")
+          print(f"-------------\nYou have {warning} warnings left.")
+          
+
+        else:
+          letters_guessed.append(letter)
+          
+          #searching letter in word
+          if letter in secret_word:
+            guessed_word = get_guessed_word(secret_word,letters_guessed)
+            print('Good guess:' + guessed_word + "\n\n-------------\n")
+
+            if is_word_guessed(secret_word,letters_guessed):
+              print('\nCongratulations, you won!')
+              score = num_of_guess * unique_letters(secret_word)
+              print(f"Your total score for this game is: {score}")
+              break
+            
+
+          else:
+            guessed_word = get_guessed_word(secret_word,letters_guessed)
+            print('Oops! That letter is not in my word: ' + guessed_word + "\n\n-------------\n")
+            num_of_guess -= is_vowel(letters_guessed[-1])
+    
+      #warning if word is not alphabet
+      else:
+        warning-=1
+        print(f"\n\n-------------\nYou have {warning} warnings left.")
+
+    if (num_of_guess == 0):
+      print(f"\nSorry, you ran out of guesses. The word was {secret_word}. ")
+    elif (warning == 0):
+      print(f"\nSorry, you ran out of warning. The word was {secret_word}. ")
+
+        
 
 # When you've completed your hangman function, scroll down to the bottom
 # of the file and uncomment the first two lines to test
@@ -231,8 +290,7 @@ if __name__ == "__main__":
     # To test part 2, comment out the pass line above and
     # uncomment the following two lines.
     
-    ######secret_word = choose_word(wordlist)
-    secret_word = 'akash'
+    secret_word = choose_word(wordlist)
     hangman(secret_word)
 
 ###############
