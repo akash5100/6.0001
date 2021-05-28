@@ -1,7 +1,7 @@
 # Problem Set 2, hangman.py
-# Name: akash
-# Collaborators: ~
-# Time spent: 7
+# Name: Akash
+# Collaborators: Akash
+# Time spent: 6 - 7
 
 # Hangman Game
 # -----------------------------------
@@ -11,7 +11,6 @@
 # (so be sure to read the docstrings!)
 import random
 import string
-from typing import Set
 
 WORDLIST_FILENAME = "words.txt"
 
