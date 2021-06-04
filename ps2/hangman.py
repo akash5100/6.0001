@@ -225,8 +225,24 @@ def match_with_gaps(my_word, other_word):
         _ , and my_word and other_word are of the same length;
         False otherwise: 
     '''
-    # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
+    #removing ' ' from my_word to compare length of my_Word and other_word
+    for word in my_word:
+      if word == '_':
+        my_word = my_word.replace(word,'')
+    
+    if len(my_word) == len(other_word):
+        my_list = list(my_word)
+
+        for i in range(len(other_word)):
+            if my_list[i] == other_word[i]:
+                return True
+            elif my_list[i] == ' ':
+                return True
+            else:
+                return False
+    else:        
+        return False
+    
 
 
 
@@ -289,13 +305,14 @@ if __name__ == "__main__":
     # To test part 2, comment out the pass line above and
     # uncomment the following two lines.
     
-    secret_word = choose_word(wordlist)
-    hangman(secret_word)
+    '''secret_word = choose_word(wordlist)
+    hangman(secret_word)'''
 
-###############
+###############s. It’s a very wise decision but bright students might be at a disadvantage. Most schools set very difficult papers in Class 11 to prompt students to balance their time between studying and physical activity. These students fare very well in the boar
     
     # To test part 3 re-comment out the above lines and 
     # uncomment the following two lines. 
     
-    #secret_word = choose_word(wordlist)
-    #hangman_with_hints(secret_word)
+    secret_word = choose_word(wordlist)
+    hangman_with_hints(secret_word)
+    
