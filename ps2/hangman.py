@@ -308,7 +308,7 @@ if __name__ == "__main__":
     '''secret_word = choose_word(wordlist)
     hangman(secret_word)'''
 
-###############s. It’s a very wise decision but bright students might be at a disadvantage. Most schools set very difficult papers in Class 11 to prompt students to balance their time between studying and physical activity. These students fare very well in the boar
+    ###############
     
     # To test part 3 re-comment out the above lines and 
     # uncomment the following two lines. 
