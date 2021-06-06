@@ -236,7 +236,7 @@ def match_with_gaps(my_word, other_word):
         for i in range(len(other_word)):
             if my_list[i] == other_word[i]:
                 return True
-            elif my_list[i] == ' ':
+            elif my_list[i] == ' ': #problem in this line
                 return True
             else:
                 return False
@@ -343,6 +343,10 @@ def hangman_with_hints(secret_word):
             guessed_word = get_guessed_word(secret_word,letters_guessed)
             print('Oops! That letter is not in my word: ' + guessed_word + "\n\n-------------\n")
             num_of_guess -= is_vowel(letters_guessed[-1])
+        
+      #if letter is * (user asking for hint)
+      elif len(letter) == 1 and letter == '*':
+        show_possible_matches(letter)  
     
       #warning if word is not alphabet
       else:
@@ -374,6 +378,7 @@ if __name__ == "__main__":
     # To test part 3 re-comment out the above lines and 
     # uncomment the following two lines. 
     
-    secret_word = choose_word(wordlist)
+    #secret_word = choose_word(wordlist)
+    secret_word = 'apple'
     hangman_with_hints(secret_word)
     
